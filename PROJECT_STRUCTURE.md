@@ -30,7 +30,7 @@
 
 ### 1. `src/neuro_sama/models/`
 
-存放数据库模型定义。目前包含 `Dialogue` 模型，用于存储 VTB 对话特征数据。
+存放数据库模型定义。目前包含 `Dialogue` 模型，用于存储 VTB 对话特征数据（包含提问 Prompt 和回答 Response 的完整对答结构）。
 
 ### 2. `src/neuro_sama/core/`
 
@@ -42,7 +42,7 @@
 
 ### 4. `src/neuro_sama/main.py`
 
-FastAPI 应用的初始化位置，负责组装路由、中间件和事件处理（如启动时创建数据库表）。
+FastAPI 应用的初始化位置，负责组装路由、中间件和生命周期管理（使用 `lifespan` 替代了过时的 `on_event`）。
 
 ### 5. `main.py` (根目录)
 

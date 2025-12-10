@@ -34,6 +34,14 @@ uv run python main.py
 - Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
 - ReDoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
+### 依赖管理
+
+本项目使用 `uv` 管理依赖。
+
+- **添加依赖**: `uv add <package_name>`
+- **添加开发依赖**: `uv add --dev <package_name>`
+- **移除依赖**: `uv remove <package_name>`
+
 ### 运行测试
 
 ```bash

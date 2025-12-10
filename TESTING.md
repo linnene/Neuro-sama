@@ -37,6 +37,10 @@ class TestNeuroSama(unittest.TestCase):
         self.assertEqual(hello(), "Hello from neuro-sama package!")
 ```
 
+### 数据库测试 (`test/test_database.py`)
+
+包含对真实数据库连接的测试以及使用内存数据库进行的模型 CRUD 测试。
+
 ### 添加新测试
 
 1. 在 `test/` 目录下创建以 `test_` 开头的 Python 文件。

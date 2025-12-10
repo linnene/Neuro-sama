@@ -13,6 +13,13 @@
   - 实现了 `Dialogue` 数据模型，用于存储 VTB 对话数据。
   - 实现了基础的 API 接口 (`POST /dialogues/`, `GET /dialogues/`)。
   - 模块化拆分：将代码拆分为 `api`, `core`, `models` 等子模块。
+- **模型重构**:
+  - 将 `Dialogue` 模型重构为问答对 (Q&A) 结构，包含 `prompt` (提问) 和 `response` (回答) 两部分。
+  - 引入 `SQLAlchemy` 的 `JSON` 类型，支持直接存储字典格式的元数据。
+- **代码优化**:
+  - 使用 FastAPI 推荐的 `lifespan` 替代了过时的 `on_event("startup")`。
+  - 添加了数据库连接测试 (`test/test_database.py`)。
+  - 在 CI 中集成了 `pytest` 自动测试。
 
 ### 遇到的问题与修复
 
