@@ -5,9 +5,15 @@ from sqlalchemy import Column, JSON
 
 class Dialogue(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    speaker: str
-    content: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
     stream_id: Optional[str] = None
-    # 使用 sa_column=Column(JSON) 自动处理 JSON 序列化/反序列化
-    meta_info: Optional[Dict[str, Any]] = Field(default=None, sa_column=Column(JSON))
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+
+    # 提问/输入 (Prompt)
+    prompt_speaker: str = Field(description="提问者身份，如 'Viewer'")
+    prompt_content: str = Field(description="提问内容")
+    prompt_meta: Optional[Dict[str, Any]] = Field(default=None, sa_column=Column(JSON), description="提问的额外元数据")
+
+    # 回答/输出 (Response)
+    response_speaker: str = Field(description="回答者身份，如 'Neuro-sama'")
+    response_content: str = Field(description="回答内容")
+    response_meta: Optional[Dict[str, Any]] = Field(default=None, sa_column=Column(JSON), description="回答的额外元数据")
