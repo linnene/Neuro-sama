@@ -1,5 +1,7 @@
+from neuro_sama import hello
+
 def main():
-    print("Hello from neruo-sama!")
+    print(hello())
 
 
 if __name__ == "__main__":
