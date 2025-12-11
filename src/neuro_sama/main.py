@@ -10,4 +10,8 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+@app.get("/health")
+def health_check():
+    return {"status": "ok", "message": "Neuro-sama backend is running"}
+
 app.include_router(dialogue.router, prefix="/dialogues", tags=["dialogues"])

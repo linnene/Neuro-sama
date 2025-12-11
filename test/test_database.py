@@ -5,6 +5,7 @@ from sqlalchemy import text
 from sqlmodel import Session, SQLModel, create_engine
 from sqlmodel.pool import StaticPool
 
+
 # 确保能导入 src
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 
@@ -57,8 +58,8 @@ class TestDatabase(unittest.TestCase):
             # 2. Read
             read_dialogue = session.get(Dialogue, dialogue.id)
             self.assertIsNotNone(read_dialogue)
-            self.assertEqual(read_dialogue.prompt_content, "Is this working?")
-            self.assertEqual(read_dialogue.response_meta, {"status": "ok"})
+            self.assertEqual(read_dialogue.prompt_content, "Is this working?") # type: ignore
+            self.assertEqual(read_dialogue.response_meta, {"status": "ok"}) # type: ignore
 
 if __name__ == '__main__':
     unittest.main()

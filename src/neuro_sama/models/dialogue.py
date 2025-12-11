@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, Dict, Any
 from sqlmodel import Field, SQLModel
 from sqlalchemy import Column, JSON
@@ -6,7 +6,7 @@ from sqlalchemy import Column, JSON
 class Dialogue(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     stream_id: Optional[str] = None
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
     # 提问/输入 (Prompt)
     prompt_speaker: str = Field(description="提问者身份，如 'Viewer'")
