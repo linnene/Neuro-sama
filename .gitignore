@@ -136,3 +136,4 @@ cython_debug/
 
 # VS Code
 .vscode/
+database.db
