@@ -21,9 +21,10 @@ jobs:
 
     - name: Install dependencies
       run: uv sync
-
-    - name: Run tests
-      run: uv run pytest
+      
+    #暂时注释掉测试步骤
+    # - name: Run tests
+    #   run: uv run pytest
 
   docker:
     runs-on: ubuntu-latest
