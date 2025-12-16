@@ -35,5 +35,5 @@ ENV PATH="/app/.venv/bin:$PATH"
 EXPOSE 8000
 
 # 启动应用
-CMD ["python", "main.py"]
+CMD [ "uv", "run", "python", "main.py" ]
 

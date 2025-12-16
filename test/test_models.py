@@ -1,5 +1,5 @@
 from datetime import datetime
-from neuro_sama.models import Stream, Dialogue
+from neuro_sama.models import Stream, QAPair, Message
 
 def test_stream_model():
     stream = Stream(
@@ -11,13 +11,36 @@ def test_stream_model():
     assert stream.stream_id == "123"
     assert stream.title == "Test Stream"
 
-def test_dialogue_model():
-    dialogue = Dialogue(
-        dialogue_id="d1",
-        stream_id="123",
-        question="Hi",
-        answer="Hello",
+def test_message_model():
+    msg = Message(
+        role="question",
+        content="Hello?",
+        speaker="User",
         timestamp=datetime.now()
     )
-    assert dialogue.question == "Hi"
-    assert dialogue.answer == "Hello"
+    assert msg.role == "question"
+    assert msg.content == "Hello?"
+
+def test_qapair_model():
+    q = Message(role="question", content="Hi", speaker="A")
+    a = Message(role="answer", content="Hello", speaker="B")
+    
+    pair = QAPair(question=q, answer=a)
+    assert pair.question.content == "Hi"
+    assert pair.answer.content == "Hello"
+
+def test_qapair_validation():
+    q = Message(role="question", content="Hi", speaker="A")
+    a = Message(role="answer", content="Hello", speaker="B")
+    
+    # Test valid pair
+    pair = QAPair.validate_pair(q, a)
+    assert pair is not None
+    
+    # Test invalid roles
+    try:
+        QAPair.validate_pair(a, q) # Wrong order
+        assert False, "Should raise ValueError"
+    except ValueError:
+        pass
+

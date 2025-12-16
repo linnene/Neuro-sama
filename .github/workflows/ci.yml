@@ -23,8 +23,8 @@ jobs:
       run: uv sync
       
     #暂时注释掉测试步骤
-    # - name: Run tests
-    #   run: uv run pytest
+    - name: Run tests
+      run: uv run pytest
 
   docker:
     runs-on: ubuntu-latest
