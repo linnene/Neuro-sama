@@ -1,5 +1,18 @@
 # 开发日志 (Development Log)
 
+## 2025-12-16
+
+### 架构精简与模型恢复
+- **移除后端组件**: 彻底移除了 `FastAPI`, `SQLModel`, `Uvicorn` 以及 `database.db`。项目不再作为 Web 服务运行。
+- **引入 Pydantic**: 添加 `pydantic` 作为核心依赖，用于数据验证。
+- **恢复数据模型**:
+  - 重建 `src/neuro_sama/models/stream.py`: 定义直播流元数据。
+  - 重建 `src/neuro_sama/models/dialogue.py`: 定义对话数据。
+  - 模型改为继承自 `pydantic.BaseModel`，去除了数据库表属性 (`table=True`)。
+- **测试更新**:
+  - 删除了旧的 API 和数据库测试。
+  - 新增 `test/test_models.py`，验证模型的实例化和字段校验。
+
 ## 2025-12-14
 
 ### 架构调整
@@ -33,9 +46,3 @@
 - **构建错误**: 修复了 `pyproject.toml` 中缺少 `[build-system]` 和 `packages` 配置导致 `uv` 无法识别包的问题。
 - **Docker 构建**: 修复了 `Dockerfile` 基础镜像名称错误。
 - **服务启动**: 解决了 Windows 下 `0.0.0.0` 访问问题，确认服务在 `localhost:8000` 正常运行。
-
-## 待办事项
-
-- [ ] 完善 API 文档。
-- [ ] 添加更多数据字段以支持 AI 微调。
-- [ ] 对接爬虫项目数据输入。
