@@ -13,9 +13,9 @@ logger = logging.getLogger(__name__)
 
 def parse_jsonl_file(
     file_path: Union[str, Path],
-    model_class: Type[T],
-) -> list[T]:
-    messages: list[T] = []
+    model_class: Type[BaseMes],
+) -> list[BaseMes]:
+    messages: list[BaseMes] = []
 
     for raw in parse_jsonl(file_path):
         try:
@@ -32,6 +32,7 @@ def parse_jsonl_file(
             )
 
     return messages
+
 
 def parse_jsonl(file_path: Union[str, Path]) -> Iterator[dict]:
     file_path = Path(file_path)

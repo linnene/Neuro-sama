@@ -14,3 +14,13 @@ test:
 
 # for file in files:
 #     save_as_jsonl(parse_jsonl_file(config.output_dir+file,BaseMes),output_path+file)
+
+from src.neuro_sama.parser import build_repeat_segments, read_jsonl_file
+from config import config
+import os
+
+files = os.listdir(config.Pending_dir)
+
+for file in files:
+    print(build_repeat_segments(read_jsonl_file(config.Pending_dir+file)))
+    

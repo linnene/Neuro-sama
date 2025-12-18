@@ -3,6 +3,17 @@ from pydantic import BaseModel
 from typing import Literal
 
 
+
+class RepeatSegment(BaseModel):
+    """
+    重复数据段
+    维护屏幕刷屏信息
+    """
+    content: str
+    start_time: datetime
+    end_time: datetime
+    count: int 
+
 class BaseMes(BaseModel):
     """
     基础消息类
@@ -39,3 +50,4 @@ class MetaEvent(BaseModel):
     """
     pass
     #TODO: 添加元信息字段
+
