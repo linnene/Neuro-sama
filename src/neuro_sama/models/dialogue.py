@@ -15,7 +15,7 @@ class Message(BaseMes):
     """
     清洗后的单条消息（问 or 答）
     """
-    role: Literal["question", "answer"]
+    role: Literal["que", "res"]
     confidence: float | None = None # 可选的置信度字段
 
 class QAPair(BaseModel):
@@ -23,15 +23,15 @@ class QAPair(BaseModel):
     已对齐的一问一答
     """
     question: Message
-    answer: Message
+    response: Message
 
     @classmethod
-    def validate_pair(cls, question: Message, answer: Message):
-        if question.role != "question":
-            raise ValueError("question.role 必须是 'question'")
-        if answer.role != "answer":
-            raise ValueError("answer.role 必须是 'answer'")
-        return cls(question=question, answer=answer)
+    def validate_pair(cls, question: Message, response: Message):
+        if question.role != "que":
+            raise ValueError("question.role 必须是 'que'")
+        if response.role != "res":
+            raise ValueError("response.role 必须是 'res'")
+        return cls(question=question, response=response)
 
 class MetaEvent(BaseModel):
     """

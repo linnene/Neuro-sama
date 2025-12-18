@@ -13,33 +13,33 @@ def test_stream_model():
 
 def test_message_model():
     msg = Message(
-        role="question",
+        role="que",
         content="Hello?",
         speaker="User",
         timestamp=datetime.now()
     )
-    assert msg.role == "question"
+    assert msg.role == "que"
     assert msg.content == "Hello?"
 
 def test_qapair_model():
-    q = Message(role="question", content="Hi", speaker="A")
-    a = Message(role="answer", content="Hello", speaker="B")
+    q = Message(role="que", content="Hi", speaker="A")
+    r = Message(role="res", content="Hello", speaker="B")
     
-    pair = QAPair(question=q, answer=a)
+    pair = QAPair(question=q, response=r)
     assert pair.question.content == "Hi"
-    assert pair.answer.content == "Hello"
+    assert pair.response.content == "Hello"
 
 def test_qapair_validation():
-    q = Message(role="question", content="Hi", speaker="A")
-    a = Message(role="answer", content="Hello", speaker="B")
+    q = Message(role="que", content="Hi", speaker="A")
+    r = Message(role="res", content="Hello", speaker="B")
     
     # Test valid pair
-    pair = QAPair.validate_pair(q, a)
+    pair = QAPair.validate_pair(q, r)
     assert pair is not None
     
     # Test invalid roles
     try:
-        QAPair.validate_pair(a, q) # Wrong order
+        QAPair.validate_pair(r, q) # Wrong order
         assert False, "Should raise ValueError"
     except ValueError:
         pass

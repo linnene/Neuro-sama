@@ -7,7 +7,6 @@ from pydantic import BaseModel, ValidationError
 
 from neuro_sama.models.dialogue import BaseMes
 
-
 T = TypeVar("T", bound=BaseModel)
 
 logger = logging.getLogger(__name__)
