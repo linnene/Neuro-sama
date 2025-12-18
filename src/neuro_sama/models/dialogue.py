@@ -3,6 +3,21 @@ from pydantic import BaseModel
 from typing import Literal
 
 
+class BaseMes(BaseModel):
+    """
+    基础消息类
+    """
+    content: str
+    speaker: str
+    timestamp: datetime | None = None
+
+class Message(BaseMes):
+    """
+    清洗后的单条消息（问 or 答）
+    """
+    role: Literal["question", "answer"]
+    confidence: float | None = None # 可选的置信度字段
+
 class QAPair(BaseModel):
     """
     已对齐的一问一答
@@ -18,15 +33,9 @@ class QAPair(BaseModel):
             raise ValueError("answer.role 必须是 'answer'")
         return cls(question=question, answer=answer)
 
-
-
-class Message(BaseModel):
+class MetaEvent(BaseModel):
     """
-    清洗后的单条消息（问 or 答）
+    元信息事件
     """
-    role: Literal["question", "answer"]
-    content: str
-    speaker: str
-    timestamp: datetime | None = None
-    confidence: float | None = None
-
+    pass
+    #TODO: 添加元信息字段
