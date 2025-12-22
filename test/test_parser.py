@@ -40,14 +40,18 @@ INVALID_JSON
     assert rows[0]["content"] == "你好"
     assert rows[1]["content"] == "世界"
 
+def test_parse_timestamp_iso_format():
+    ts = _parse_timestamp("2025-12-22T12:26:24.386275+08:00")
 
-def test_parse_timestamp_valid():
-    ts = _parse_timestamp("12181032")
     assert isinstance(ts, datetime)
+    assert ts.year == 2025
     assert ts.month == 12
-    assert ts.day == 18
-    assert ts.hour == 10
-    assert ts.minute == 32
+    assert ts.day == 22
+    assert ts.hour == 12
+    assert ts.minute == 26
+    assert ts.second == 24
+    assert ts.tzinfo is not None
+
 
 
 def test_parse_timestamp_invalid():
@@ -57,7 +61,7 @@ def test_parse_timestamp_invalid():
 
 
 def test_parse_jsonl_file_to_model(tmp_path: Path):
-    content = """{"speaker": "chat", "content": "测试", "data_ct": "12181032"}"""
+    content = """{"speaker": "chat", "content": "测试", "data_ct": "2025-12-22T12:26:24.386275+08:00"}"""
     file = tmp_path / "input.jsonl"
     file.write_text(content, encoding="utf-8")
 

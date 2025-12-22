@@ -47,22 +47,10 @@ def build_repeat_segments(
     count = 0
 
     for msg in messages:
+        msg.content = normalize_content(msg.content)
         if msg.timestamp is None:
-            logger.warning("跳过没有时间的消息：%s", msg.content)
-            continue
-        if current_content is None:
-            current_content = normalize_content(msg.content)
-            # current_content = msg.content
-            start_time = msg.timestamp
-            end_time = msg.timestamp
-            count = 1
-            continue
 
-        if normalize_content(msg.content) == current_content:
-            count += 1
-            end_time = msg.timestamp
-        else:
-            if count >= 4 and start_time and end_time :
+            if count >= 3 and current_content and start_time and end_time:
                 segments.append(
                     RepeatSegment(
                         content=current_content,
@@ -71,10 +59,35 @@ def build_repeat_segments(
                         count=count,
                     )
                 )
-            current_content = normalize_content(msg.content)
+            
+            logger.warning("跳过没有时间的消息：%s", msg.content)
+            continue
+        if current_content is None:
+            current_content = msg.content
+            # current_content = msg.content
             start_time = msg.timestamp
             end_time = msg.timestamp
             count = 1
+            continue
+
+        if msg.content == current_content:
+            count += 1
+            end_time = msg.timestamp
+        else:
+            if count >= 2 and start_time and end_time :
+                segments.append(
+                    RepeatSegment(
+                        content=current_content,
+                        start_time=start_time,
+                        end_time=end_time,
+                        count=count,
+                    )
+                )
+            current_content = msg.content
+            start_time = msg.timestamp
+            end_time = msg.timestamp
+            count = 1
+
             
     return segments
 
