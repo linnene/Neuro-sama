@@ -3,7 +3,6 @@ from pydantic import BaseModel
 from typing import Literal
 
 
-
 class RepeatSegment(BaseModel):
     """
     重复数据段

@@ -68,13 +68,11 @@ def _parse_timestamp(value: str|None = None) -> Union[datetime, None]:
     """
     if not value:
         return None
-
+    
     try:
-        # 如果 data_ct 是类似 12181034 这种字符串
-        return datetime.strptime(value, "%m%d%H%M")
+        return datetime.fromisoformat(value)
     except ValueError:
         return None
-
 
 def save_as_jsonl(messages: list[BaseMes], output_path: Union[str, Path]):
     """

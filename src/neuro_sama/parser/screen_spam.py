@@ -4,6 +4,7 @@ neuro_sama.parser.screen_spam
 Module for screen spam parsing functionalities.
 Provides tools to parse and handle screen spam data.
 """
+import re
 import json
 import logging
 from datetime import datetime
@@ -13,6 +14,7 @@ from neuro_sama.models.dialogue import BaseMes, RepeatSegment
 
 logger = logging.getLogger(__name__)
 
+#read jsonl file and yield BaseMes objects
 def read_jsonl_file(file_path: str) -> Iterator[BaseMes]:
     with open(file_path, "r", encoding="utf-8") as f:
         for lineno, line in enumerate(f, start=1):
@@ -45,11 +47,24 @@ def build_repeat_segments(
     count = 0
 
     for msg in messages:
+        msg.content = normalize_content(msg.content)
         if msg.timestamp is None:
+
+            if count >= 3 and current_content and start_time and end_time:
+                segments.append(
+                    RepeatSegment(
+                        content=current_content,
+                        start_time=start_time,
+                        end_time=end_time,
+                        count=count,
+                    )
+                )
+            
             logger.warning("跳过没有时间的消息：%s", msg.content)
             continue
         if current_content is None:
             current_content = msg.content
+            # current_content = msg.content
             start_time = msg.timestamp
             end_time = msg.timestamp
             count = 1
@@ -59,7 +74,7 @@ def build_repeat_segments(
             count += 1
             end_time = msg.timestamp
         else:
-            if count >= 2:
+            if count >= 2 and start_time and end_time :
                 segments.append(
                     RepeatSegment(
                         content=current_content,
@@ -73,19 +88,10 @@ def build_repeat_segments(
             end_time = msg.timestamp
             count = 1
 
-    if current_content is not None:
-        segments.append(
-            RepeatSegment(
-                content=current_content,
-                start_time=start_time,
-                end_time=end_time,
-                count=count,
-            )
-        )
-
+            
     return segments
 
-
+# 解析时间字符串为 datetime 对象
 def parse_timestamp(value: Optional[str]) -> Optional[datetime]:
     if not value:
         return None
@@ -94,3 +100,17 @@ def parse_timestamp(value: Optional[str]) -> Optional[datetime]:
     except ValueError as e:
         logger.warning("时间解析失败：%s", e)
         return None
+
+# 规范化消息内容，去除多余空白，标点符号等
+def normalize_content(content: str) -> str:
+    """
+    修复版：去除空格和所有标点符号
+    """
+    if not content:
+        return ""
+    
+    pattern = r'[^\w]'  # \w 匹配字母、数字、下划线
+    
+    cleaned_text = re.sub(pattern, '', content)
+    
+    return cleaned_text
