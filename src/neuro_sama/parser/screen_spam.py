@@ -14,6 +14,8 @@ from neuro_sama.models.dialogue import BaseMes, RepeatSegment
 
 logger = logging.getLogger(__name__)
 
+
+
 #read jsonl file and yield BaseMes objects
 def read_jsonl_file(file_path: str) -> Iterator[BaseMes]:
     with open(file_path, "r", encoding="utf-8") as f:
@@ -74,7 +76,7 @@ def build_repeat_segments(
             count += 1
             end_time = msg.timestamp
         else:
-            if count >= 2 and start_time and end_time :
+            if count >= 3 and start_time and end_time :
                 segments.append(
                     RepeatSegment(
                         content=current_content,
@@ -90,6 +92,7 @@ def build_repeat_segments(
 
             
     return segments
+
 
 # 解析时间字符串为 datetime 对象
 def parse_timestamp(value: Optional[str]) -> Optional[datetime]:

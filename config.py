@@ -3,8 +3,8 @@ from datetime import timedelta
 BASE_DIR = "d:/PythonWorkSpace/Neruo-sama/"
 
 class Config:
-    output_dir = BASE_DIR + "output/"
-    Pending_dir = BASE_DIR + "pending_data/"
+    raw_dir = BASE_DIR + "data/raw/"
+    cleaned_dir = BASE_DIR + "data/cleaned/"
 
     #screen spam detection parameters
     MIN_REPEAT_COUNT = 3
