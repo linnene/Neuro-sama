@@ -49,3 +49,43 @@ uv sync
 2.  **Dialogue**: 对话数据（问题, 回答, 时间戳, 置信度等）。
 
 这些模型用于验证从爬虫同步过来的 JSON 数据格式。
+
+```
+Neruo-sama
+├─ config.py
+├─ data
+│  ├─ cleaned
+│  │  └─ 7589012_pend.jsonl
+│  ├─ events
+│  │  ├─ alignment
+│  │  └─ spam
+│  └─ raw
+│     ├─ audio
+│     └─ danmaku
+│        └─ 7589012.jsonl
+├─ DEV_LOG.md
+├─ Dockerfile
+├─ main.py
+├─ PROJECT_STRUCTURE.md
+├─ pyproject.toml
+├─ README.md
+├─ ROADMAP.md
+├─ src
+│  └─ neuro_sama
+│     ├─ models
+│     │  ├─ dialogue.py
+│     │  ├─ stream.py
+│     │  └─ __init__.py
+│     ├─ parser
+│     │  ├─ parse_jsonl.py
+│     │  ├─ screen_spam.py
+│     │  └─ __init__.py
+│     └─ __init__.py
+├─ test
+│  ├─ test_models.py
+│  ├─ test_parser.py
+│  └─ test_spam.py
+├─ TESTING.md
+└─ uv.lock
+
+```

@@ -14,6 +14,16 @@ from neuro_sama.models.dialogue import BaseMes, RepeatSegment
 
 logger = logging.getLogger(__name__)
 
+# ScreenSpam 解析器主类
+class ScreenSpam():
+
+    def __init__(self, input_path: str, output_path: str):
+        self.input_path = input_path
+        self.output_path = output_path
+
+    def start(self):
+        f_r = read_jsonl_file(self.input_path)
+        segments = build_repeat_segments_Iterator(f_r)
 
 
 #read jsonl file and yield BaseMes objects
@@ -38,7 +48,7 @@ def read_jsonl_file(file_path: str) -> Iterator[BaseMes]:
 
 
 # 根据消息列表构建重复数据段
-def build_repeat_segments(
+def build_repeat_segments_Iterator(
     messages: Iterator[BaseMes],
 ) -> List[RepeatSegment]:
     segments: List[RepeatSegment] = []
@@ -92,6 +102,7 @@ def build_repeat_segments(
 
             
     return segments
+    
 
 
 # 解析时间字符串为 datetime 对象

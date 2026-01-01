@@ -22,7 +22,15 @@ uv run pytest
 
 该文件测试 `Stream` 和 `Dialogue` 模型的实例化和字段验证。
 
-**示例代码**:
+### `test/test_parser.py`
+
+测试 `src/neuro_sama/parser/parse_jsonl.py` 中的 JSONL 解析功能，确保能正确读取和解析数据文件。
+
+### `test/test_spam.py`
+
+测试 `src/neuro_sama/parser/screen_spam.py` 中的垃圾过滤逻辑，验证重复内容和垃圾弹幕的识别准确性。
+
+**示例代码 (`test_models.py`)**:
 
 ```python
 from datetime import datetime

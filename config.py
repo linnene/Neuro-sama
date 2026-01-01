@@ -3,7 +3,7 @@ from datetime import timedelta
 BASE_DIR = "d:/PythonWorkSpace/Neruo-sama/"
 
 class Config:
-    raw_dir = BASE_DIR + "data/raw/"
+    raw_dir = BASE_DIR + "data/raw/danmaku/"
     cleaned_dir = BASE_DIR + "data/cleaned/"
 
     #screen spam detection parameters
