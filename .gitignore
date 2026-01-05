@@ -139,5 +139,7 @@ cython_debug/
 database.db
 
 
-output/
+outputs/
 pending_data/
+data/raw/audio/*.wav
+data/raw/danmaku/*.jsonl

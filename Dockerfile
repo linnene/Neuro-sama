@@ -1,5 +1,5 @@
-# 使用 Python 3.14 slim 版本作为基础镜像
-FROM python:3.14-slim
+# 使用 Python 3.12 slim 版本作为基础镜像
+FROM python:3.12-slim
 
 # 从官方镜像中复制 uv 工具
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv

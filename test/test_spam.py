@@ -5,7 +5,7 @@ from datetime import datetime
 
 from neuro_sama.parser.screen_spam import (
     read_jsonl_file,
-    build_repeat_segments,
+    build_repeat_segments_Iterator,
     normalize_content,
     parse_timestamp
 )
@@ -43,7 +43,7 @@ def test_build_repeat_segments():
         BaseMes(content="Spam message", speaker="User", timestamp=datetime(1, 1, 12, 6, tzinfo=timezone.utc)),
         BaseMes(content="Spam message", speaker="User", timestamp=None),  # This should be skipped
     ]
-    segments = build_repeat_segments(iter(messages))
+    segments = build_repeat_segments_Iterator(iter(messages))
     assert len(segments) == 2
     assert segments[0].content == "Spammessage"
     assert segments[0].count == 3

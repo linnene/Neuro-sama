@@ -18,7 +18,7 @@
 
 ### 环境准备
 
-本项目使用 `uv` 进行包管理，Python 版本要求 `>=3.14`。
+本项目使用 `uv` 进行包管理，Python 版本要求 `>=3.12`。
 
 ```bash
 uv sync
@@ -26,7 +26,7 @@ uv sync
 
 ### 核心依赖
 
-- **Python 3.14+**
+- **Python 3.12+**
 - **Pydantic**: 用于数据结构定义和校验。
 
 ### 常用命令
@@ -49,3 +49,43 @@ uv sync
 2.  **Dialogue**: 对话数据（问题, 回答, 时间戳, 置信度等）。
 
 这些模型用于验证从爬虫同步过来的 JSON 数据格式。
+
+```
+Neruo-sama
+├─ config.py
+├─ data
+│  ├─ cleaned
+│  │  └─ 7589012_pend.jsonl
+│  ├─ events
+│  │  ├─ alignment
+│  │  └─ spam
+│  └─ raw
+│     ├─ audio
+│     └─ danmaku
+│        └─ 7589012.jsonl
+├─ DEV_LOG.md
+├─ Dockerfile
+├─ main.py
+├─ PROJECT_STRUCTURE.md
+├─ pyproject.toml
+├─ README.md
+├─ ROADMAP.md
+├─ src
+│  └─ neuro_sama
+│     ├─ models
+│     │  ├─ dialogue.py
+│     │  ├─ stream.py
+│     │  └─ __init__.py
+│     ├─ parser
+│     │  ├─ parse_jsonl.py
+│     │  ├─ screen_spam.py
+│     │  └─ __init__.py
+│     └─ __init__.py
+├─ test
+│  ├─ test_models.py
+│  ├─ test_parser.py
+│  └─ test_spam.py
+├─ TESTING.md
+└─ uv.lock
+
+```
