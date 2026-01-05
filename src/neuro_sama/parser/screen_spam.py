@@ -104,7 +104,6 @@ def build_repeat_segments_Iterator(
     return segments
     
 
-
 # 解析时间字符串为 datetime 对象
 def parse_timestamp(value: Optional[str]) -> Optional[datetime]:
     if not value:
