@@ -8,7 +8,6 @@ dependencies = [
     "faster-whisper>=1.2.1",
     "pydantic>=2.12.5",
     "pytest-cov>=7.0.0",
-    "torch>=2.9.1",
 ]
 
 [build-system]
